@@ -1,6 +1,11 @@
 import localFont from "next/font/local";
 import "./globals.css";
 
+// components
+import Header from "@/components/Header";
+import PageTransisition from "@/components/PageTransition";
+import StairTransition from "@/components/StairTransition";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -11,6 +16,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+const americanCasual = localFont({
+  src: "./fonts/AmericanCasual.otf",
+  variable: "--font-american-casual",
+  weight: "100 900",
+})
 
 export const metadata = {
   title: "Create Next App",
@@ -21,9 +31,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${americanCasual.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Header />
+        <StairTransition />
+        <PageTransisition>{children}</PageTransisition>
       </body>
     </html>
   );
