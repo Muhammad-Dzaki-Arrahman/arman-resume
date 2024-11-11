@@ -50,6 +50,10 @@ const about = {
       fieldName: "LinkedIn",
       valueName: "M_Dzaki_Arrahman",
     },
+    {
+      fieldName: "Github",
+      valueName: "Muhammad_Dzaki_Arrahman",
+    },
   ],
 };
 
@@ -167,6 +171,10 @@ const experience = {
       duration: "September 2024 - Oktober 2024",
       techUsed: [
         {
+          icon: <SiPython />,
+          name: "Python",
+        },
+        {
           icon: <FaFileExcel />,
           name: "Excel",
         },
@@ -202,6 +210,10 @@ const experience = {
           icon: <SiGit />,
           name: "Git",
         },
+        {
+          icon: <SiNextdotjs />,
+          name: "NextJS",
+        },
       ],
     },
   ],
@@ -213,27 +225,27 @@ const education = {
   desc: "Studying Computer Science at the University of Lampung, enhanced skills through data analysis, programming courses, and multiple scholarship programs.",
   items: [
     {
-      Institution: "University of Lampung",
+      institution: "University of Lampung",
       position: "Bachelor Program",
       duration: "September 2020 - Now",
     },
     {
-      Institution: "Online Course Data Visualisation",
+      institution: "Online Course Data Visualisation",
       position: "Data Analysis",
       duration: "November 2024 - Now",
     },
     {
-      Institution: "Digital Talent Scholarship",
+      institution: "Digital Talent Scholarship",
       position: "Data Science Scholarship Program",
       duration: "August 2024 - September 2024",
     },
     {
-      Institution: "RevoU Data Analyst Scholarship",
+      institution: "RevoU Data Analyst Scholarship",
       position: "Data Analyst Scholarship Program",
       duration: "January 2023",
     },
     {
-      Institution: "Udacoding Web Developer Scholarship",
+      institution: "Udacoding Web Developer Scholarship",
       position: "Basic Web Programming",
       duration: " January 2021 - April 2021",
     },
@@ -267,32 +279,38 @@ const skills = {
     },
     {
       icon: <SiTailwindcss />,
-      name: "ReactJS",
+      name: "TailwindCSS",
     },
     {
       icon: <SiBootstrap />,
-      name: "ReactJS",
+      name: "Bootstrap",
     },
     {
       icon: <SiNextdotjs />,
-      name: "ReactJS",
+      name: "NextJS",
     },
     {
       icon: <SiLaravel />,
-      name: "ReactJS",
+      name: "Laravel",
     },
     {
       icon: <SiMysql />,
-      name: "ReactJS",
+      name: "MySQL",
     },
     {
       icon: <SiNodedotjs />,
-      name: "ReactJS",
+      name: "NodeJS",
     },
   ],
 };
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 
 const Resume = () => {
   return (
@@ -325,7 +343,9 @@ const Resume = () => {
             {/* experience */}
             <TabsContent value="experience" className="w-full">
               <div className="flex flex-col gap-7 text-center xl:text-left">
-                <h3 className="text-4xl font-bold">{experience.title}</h3>
+                <h3 className="text-4xl font-bold text-accent">
+                  {experience.title}
+                </h3>
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
                   {experience.desc}
                 </p>
@@ -333,28 +353,33 @@ const Resume = () => {
                   <ul className="grid grid-cold-1 lg:grid-cols-2 gap-8">
                     {experience.items.map((item, index) => {
                       return (
-                        <li key={index} className="bg-[#232329]">
-                          <h2 className="text-2xl font-bold">
-                            {item.projectTitle}
-                          </h2>
-                          <span>{item.duration}</span>
-                          <h3>{item.position}</h3>
-                          <div>
-                            {/* dot */}
-                            <span></span>
-                            <p>{item.company}</p>
-                          </div>
-                          <div>
-                            <ul className="flex items-center justify-center gap-2 mt-2 xl:mt-0 text-5xl">
+                        <li
+                          key={index}
+                          className="bg-[#232329] py-6 px-10 rounded-xl gap-1 flex flex-col justify-between h-full"
+                        >
+                          <span className="text-accent">{item.duration}</span>
+                          <h3 className="text-xl max-w-7xl min-h-12 text-center lg:text-left">
+                            {item.position}
+                          </h3>
+                          <div className="mt-3 min-h-16 xl:mb-2">
+                            <ul className="flex items-center justify-center flex-wrap gap-4 mt-2 xl:mt-0 text-5xl">
                               {item.techUsed &&
                                 item.techUsed.map((tech, techIndex) => {
                                   return (
-                                    <li key={techIndex} className="flex gap-6">
+                                    <li
+                                      key={techIndex}
+                                      className="flex flex-wrap gap-6"
+                                    >
                                       <span>{tech.icon}</span>
                                     </li>
                                   );
                                 })}
                             </ul>
+                          </div>
+                          <div className="flex justify-center items-center xl:justify-start gap-2 xl:mt-auto">
+                            {/* dot */}
+                            <span className="w-2 h-2 rounded-full bg-accent"></span>
+                            <p className="text-white/60">{item.company}</p>
                           </div>
                         </li>
                       );
@@ -366,15 +391,98 @@ const Resume = () => {
 
             {/* education */}
             <TabsContent value="education" className="w-full">
-              education
+              <div className="flex flex-col gap-7 text-center xl:text-left">
+                <h3 className="text-4xl font-bold text-accent">
+                  {education.title}
+                </h3>
+                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
+                  {education.desc}
+                </p>
+                <ScrollArea className="h-[400px] style">
+                  <ul className="grid grid-cold-1 lg:grid-cols-2 gap-8">
+                    {education.items.map((item, index) => {
+                      return (
+                        <li
+                          key={index}
+                          className="bg-[#232329] py-6 px-10 rounded-xl gap-1"
+                        >
+                          <span className="text-accent">{item.duration}</span>
+                          <h3 className="text-xl max-w-7xl min-h-12 text-center lg:text-left">
+                            {item.position}
+                          </h3>
+                          <div className="flex justify-center items-center xl:justify-start gap-2">
+                            {/* dot */}
+                            <span className="w-2 h-2 rounded-full bg-accent"></span>
+                            <p className="text-white/60">{item.institution}</p>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </ScrollArea>
+              </div>
             </TabsContent>
+
             {/* skills */}
-            <TabsContent value="skills" className="w-full">
-              skills
+            <TabsContent value="skills" className="w-full h-full">
+              <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 text-center xl:text-left ">
+                  <h3 className="text-4xl font-bold text-accent">
+                    {skills.title}
+                  </h3>
+                  <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
+                    {skills.desc}
+                  </p>
+                </div>
+                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:gap-8 ">
+                  {skills.skillList.map((skill, index) => {
+                    return (
+                      <li key={index}>
+                        <TooltipProvider delayDuration={100}>
+                          <Tooltip>
+                            <TooltipTrigger className="flex justify-center w-full h-32 bg-[#232329] group rounded-xl items-center">
+                              <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                {skill.icon}
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="capitalize">{skill.name}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </TabsContent>
+
             {/* about */}
-            <TabsContent value="about" className="w-full">
-              about
+            <TabsContent
+              value="about"
+              className="w-full text-center xl:text-left"
+            >
+              <div className="flex flex-col gap-8">
+                <h3 className="text-4xl font-bold text-accent">
+                  {about.title}
+                </h3>
+                <p className="text-white/60 max-w-[600px] mx-auto xl:mx-0">
+                  {about.desc}
+                </p>
+                <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[620px] mx-auto xl:mx-0">
+                  {about.info.map((item, index) => {
+                    return (
+                      <li
+                        key={index}
+                        className="flex justify-center items-center xl:justify-start gap-4"
+                      >
+                        <span className="text-white/60">{item.fieldName}</span>
+                        <span className="text-xl">{item.valueName}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </TabsContent>
           </div>
         </Tabs>
