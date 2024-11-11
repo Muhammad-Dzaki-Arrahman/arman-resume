@@ -21,7 +21,7 @@ const home = () => {
             <p className="max-w-[500px] mb-9 text-white/80">
               Good at crafting wonderful digital frontend website and focus on
               using javascript programming language and it's library for modern
-              website.
+              website and Data Analyst.
             </p>
             {/* Button and Social Media */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
